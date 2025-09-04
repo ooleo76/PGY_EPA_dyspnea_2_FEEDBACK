@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臨床技能評估單_呼吸道</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .info-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #007bff;
+        }
+        .info-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .info-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+        }
+        .section h2 {
+            color: #495057;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .section h3 {
+            color: #6c757d;
+            margin: 20px 0 10px 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .subsection {
+            margin-bottom: 30px;
+        }
+        .item-group {
+            display: grid;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            min-height: 24px;
+        }
+        .checkbox-item.improvement {
+            border-left: 4px solid #dc3545;
+        }
+        .checkbox-item.good {
+            border-left: 4px solid #28a745;
+        }
+        .checkbox-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        .checkbox-item.checked.improvement {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+        .checkbox-item.checked.good {
+            border-color: #28a745;
+            background: #f0fff4;
+        }
+        input[type="checkbox"] {
+            margin: 0;
+            transform: scale(1.2);
+            flex-shrink: 0;
+        }
+        .checkbox-item label {
+            font-size: 14px;
+            line-height: 1.4;
+            cursor: pointer;
+            flex: 1;
+            margin: 0;
+        }
+        .editable-text {
+            background: transparent;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            width: 100%;
+            resize: none;
+            padding: 0;
+            min-height: 20px;
+        }
+        .editable-text:focus {
+            outline: 1px solid #007bff;
+            background: white;
+            border-radius: 3px;
+            padding: 3px;
+        }
+        .custom-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            background: #f8f9fa;
+            margin: 10px 0;
+            min-height: 24px;
+            border-left: 4px solid #dc3545;
+        }
+        .custom-item input[type="text"] {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            padding: 5px;
+        }
+        .custom-item input[type="text"]:focus {
+            outline: none;
+            background: white;
+            border-radius: 3px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: #f8f9fa;
+            font-size: 13px;
+        }
+        .radio-item:hover {
+            border-color: #007bff;
+            background: #e3f2fd;
+        }
+        .radio-item.selected {
+            border-color: #007bff;
+            background: #007bff;
+            color: white;
+        }
+        input[type="radio"] {
+            margin: 0;
+        }
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-generate {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+        }
+        .btn-clear {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+        }
+        .btn-clear:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+        }
+        .btn-save {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+        }
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+        }
+        .btn-copy {
+            background: linear-gradient(45deg, #fd7e14, #e55100);
+            color: white;
+        }
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(253, 126, 20, 0.3);
+        }
+        #report {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+            white-space: pre-line;
+            line-height: 1.6;
+            font-size: 14px;
+            display: none;
+        }
+        #report h3 {
+            color: #007bff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #495057;
+        }
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .section-divider {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #dc3545, #28a745);
+            margin: 20px 0;
+        }
+        .report-buttons {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        .advice-section {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+        }
+        .advice-section h3 {
+            color: #495057;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .advice-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>臨床技能評估單</h1>
+        <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">呼吸困難評估與氣管內管插管</p>
+        
+        <div class="info-section">
+            <div class="info-row">
+                <div class="input-group">
+                    <label for="student-name">學員:</label>
+                    <input type="text" id="student-name" placeholder="請輸入學員姓名">
+                </div>
+                <div class="input-group">
+                    <label for="evaluator">評估者:</label>
+                    <input type="text" id="evaluator" placeholder="請輸入評估者姓名">
+                </div>
+                <div class="input-group">
+                    <label for="eval-date">評估日期:</label>
+                    <input type="date" id="eval-date">
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>一、呼吸困難評估</h2>
+            
+            <div class="subsection">
+                <h3>病史收集 (History Taking)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="hx_imp_1" data-category="病史收集" data-type="improvement">
+                        <label for="hx_imp_1">
+                            <textarea class="editable-text" rows="1">病史收集不完整，需要更詳細詢問相關症狀</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="hx_imp_2" data-category="病史收集" data-type="improvement">
+                        <label for="hx_imp_2">
+                            <textarea class="editable-text" rows="1">需要加強詢問過去病史與用藥史</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="hx_imp_3" data-category="病史收集" data-type="improvement">
+                        <label for="hx_imp_3">
+                            <textarea class="editable-text" rows="1">應詢問症狀發生的時間序列與誘發因子</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="hx_imp_4" data-category="病史收集" data-type="improvement">
+                        <label for="hx_imp_4">
+                            <textarea class="editable-text" rows="1">如果有擔心的疾病，可針對其合併的症狀做詢問</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="hx_imp_5" data-category="病史收集" data-type="improvement">
+                        <label for="hx_imp_5">
+                            <textarea class="editable-text" rows="1">在病人出現危急況狀時，需要以快速、重點的方式來取得資訊</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="hx_custom_1" data-category="病史收集" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="hx_good_1" data-category="病史收集" data-type="good">
+                        <label for="hx_good_1">
+                            <textarea class="editable-text" rows="1">病史收集完整且有條理</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="hx_good_2" data-category="病史收集" data-type="good">
+                        <label for="hx_good_2">
+                            <textarea class="editable-text" rows="1">能夠抓到重點症狀進行深入詢問</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="hx_good_3" data-category="病史收集" data-type="good">
+                        <label for="hx_good_3">
+                            <textarea class="editable-text" rows="1">與病人溝通良好，態度親切</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="hx_good_4" data-category="病史收集" data-type="good">
+                        <label for="hx_good_4">
+                            <textarea class="editable-text" rows="1">能夠系統性地收集病史資料</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="hx_good_5" data-category="病史收集" data-type="good">
+                        <label for="hx_good_5">
+                            <textarea class="editable-text" rows="1">對於複雜病史能夠整理歸納</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>理學檢查 (Physical Examination)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="pe_imp_1" data-category="理學檢查" data-type="improvement">
+                        <label for="pe_imp_1">
+                            <textarea class="editable-text" rows="1">呼吸道評估不完整，醒著病人可請其咳嗽評估
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="pe_imp_2" data-category="理學檢查" data-type="improvement">
+                        <label for="pe_imp_2">
+                            <textarea class="editable-text" rows="1">體液評估不足(水腫等)</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="pe_imp_3" data-category="理學檢查" data-type="improvement">
+                        <label for="pe_imp_3">
+                            <textarea class="editable-text" rows="1">如擔心貧血，可以直接看conjunctiva</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="pe_imp_4" data-category="理學檢查" data-type="improvement">
+                        <label for="pe_imp_4">
+                            <textarea class="editable-text" rows="1">生命徵象監測與評估需要更積極</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="pe_imp_5" data-category="理學檢查" data-type="improvement">
+                        <label for="pe_imp_5">
+                            <textarea class="editable-text" rows="1">擔心酸鹼問題，可以注意是否有kussmaul breathing</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="pe_custom_1" data-category="理學檢查" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="pe_good_1" data-category="理學檢查" data-type="good">
+                        <label for="pe_good_1">
+                            <textarea class="editable-text" rows="1">理學檢查技巧純熟，手法正確</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="pe_good_2" data-category="理學檢查" data-type="good">
+                        <label for="pe_good_2">
+                            <textarea class="editable-text" rows="1">聽診發現正確，能分辨異常音韻</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="pe_good_3" data-category="理學檢查" data-type="good">
+                        <label for="pe_good_3">
+                            <textarea class="editable-text" rows="1">檢查過程中注意病人舒適度</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="pe_good_4" data-category="理學檢查" data-type="good">
+                        <label for="pe_good_4">
+                            <textarea class="editable-text" rows="1">能夠針對症狀進行重點檢查</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="pe_good_5" data-category="理學檢查" data-type="good">
+                        <label for="pe_good_5">
+                            <textarea class="editable-text" rows="1">檢查發現能與病史相互佐證</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>處置與治療 (Treatment & Management)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tx_imp_1" data-category="處置與治療" data-type="improvement">
+                        <label for="tx_imp_1">
+                            <textarea class="editable-text" rows="1">急性病人處置反應過慢，需要更迅速行動</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tx_imp_2" data-category="處置與治療" data-type="improvement">
+                        <label for="tx_imp_2">
+                            <textarea class="editable-text" rows="1">FiO2理解不足，建議從VM50%/NRM再慢慢taper</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tx_imp_3" data-category="處置與治療" data-type="improvement">
+                        <label for="tx_imp_3">
+                            <textarea class="editable-text" rows="1">COPD急性呼吸衰竭時不應固守SpO2 88-92%</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tx_imp_4" data-category="處置與治療" data-type="improvement">
+                        <label for="tx_imp_4">
+                            <textarea class="editable-text" rows="1">升階抗生素不急迫，會浪費人力資源</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tx_imp_5" data-category="處置與治療" data-type="improvement">
+                        <label for="tx_imp_5">
+                            <textarea class="editable-text" rows="1">治療優先順序判斷不當</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="tx_custom_1" data-category="處置與治療" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tx_good_1" data-category="處置與治療" data-type="good">
+                        <label for="tx_good_1">
+                            <textarea class="editable-text" rows="1">處置迅速且適當，反應良好</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tx_good_2" data-category="處置與治療" data-type="good">
+                        <label for="tx_good_2">
+                            <textarea class="editable-text" rows="1">氧氣治療使用得當，能觀察反應</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tx_good_3" data-category="處置與治療" data-type="good">
+                        <label for="tx_good_3">
+                            <textarea class="editable-text" rows="1">能夠評估治療反應並調整</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tx_good_4" data-category="處置與治療" data-type="good">
+                        <label for="tx_good_4">
+                            <textarea class="editable-text" rows="1">具備良好的臨床判斷能力</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tx_good_5" data-category="處置與治療" data-type="good">
+                        <label for="tx_good_5">
+                            <textarea class="editable-text" rows="1">處置過程中注意病人安全</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>檢驗檢查 (Laboratory & Imaging)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="lab_imp_1" data-category="檢驗檢查" data-type="improvement">
+                        <label for="lab_imp_1">
+                            <textarea class="editable-text" rows="1">抽血項目不明確，應包含三管、ABG、lactate</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="lab_imp_2" data-category="檢驗檢查" data-type="improvement">
+                        <label for="lab_imp_2">
+                            <textarea class="editable-text" rows="1">CXR評估通氣、氧合指標(PaO2, PaCO2, PF ratio)需要加強</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="lab_imp_3" data-category="檢驗檢查" data-type="improvement">
+                        <label for="lab_imp_3">
+                            <textarea class="editable-text" rows="1">ABG分析能力需要提升(VQ mismatch vs shunt)</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="lab_imp_4" data-category="檢驗檢查" data-type="improvement">
+                        <label for="lab_imp_4">
+                            <textarea class="editable-text" rows="1">檢查結果解讀不完整</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="lab_imp_5" data-category="檢驗檢查" data-type="improvement">
+                        <label for="lab_imp_5">
+                            <textarea class="editable-text" rows="1">檢查項目選擇缺乏針對性</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="lab_custom_1" data-category="檢驗檢查" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="lab_good_1" data-category="檢驗檢查" data-type="good">
+                        <label for="lab_good_1">
+                            <textarea class="editable-text" rows="1">檢查項目選擇得當且完整</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="lab_good_2" data-category="檢驗檢查" data-type="good">
+                        <label for="lab_good_2">
+                            <textarea class="editable-text" rows="1">ABG結果分析正確，理解病生理機轉</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="lab_good_3" data-category="檢驗檢查" data-type="good">
+                        <label for="lab_good_3">
+                            <textarea class="editable-text" rows="1">CXR判讀能力佳，能發現重要異常</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="lab_good_4" data-category="檢驗檢查" data-type="good">
+                        <label for="lab_good_4">
+                            <textarea class="editable-text" rows="1">能整合檢查結果與臨床表現</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="lab_good_5" data-category="檢驗檢查" data-type="good">
+                        <label for="lab_good_5">
+                            <textarea class="editable-text" rows="1">檢查時程安排合理，效率良好</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>交班報告 (Handover)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="handover_imp_1" data-category="交班報告" data-type="improvement">
+                        <label for="handover_imp_1">
+                            <textarea class="editable-text" rows="1">交班缺乏臨床思維，僅報告數據</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="handover_imp_2" data-category="交班報告" data-type="improvement">
+                        <label for="handover_imp_2">
+                            <textarea class="editable-text" rows="1">需要學習講出評估結果(如PNA progression)</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="handover_imp_3" data-category="交班報告" data-type="improvement">
+                        <label for="handover_imp_3">
+                            <textarea class="editable-text" rows="1">應包含鑑別診斷與下一步計畫</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="handover_imp_4" data-category="交班報告" data-type="improvement">
+                        <label for="handover_imp_4">
+                            <textarea class="editable-text" rows="1">交班內容組織不佳，缺乏邏輯性</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="handover_imp_5" data-category="交班報告" data-type="improvement">
+                        <label for="handover_imp_5">
+                            <textarea class="editable-text" rows="1">重要資訊遺漏，交班不完整</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="handover_custom_1" data-category="交班報告" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="handover_good_1" data-category="交班報告" data-type="good">
+                        <label for="handover_good_1">
+                            <textarea class="editable-text" rows="1">交班內容完整且有條理</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="handover_good_2" data-category="交班報告" data-type="good">
+                        <label for="handover_good_2">
+                            <textarea class="editable-text" rows="1">能結合臨床思維進行分析</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="handover_good_3" data-category="交班報告" data-type="good">
+                        <label for="handover_good_3">
+                            <textarea class="editable-text" rows="1">鑑別診斷清楚，治療計畫明確</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="handover_good_4" data-category="交班報告" data-type="good">
+                        <label for="handover_good_4">
+                            <textarea class="editable-text" rows="1">能抓住重點，簡潔有力</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="handover_good_5" data-category="交班報告" data-type="good">
+                        <label for="handover_good_5">
+                            <textarea class="editable-text" rows="1">表達清楚，溝通能力佳</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>二、氣管內管插管技能</h2>
+            
+            <div class="subsection">
+                <h3>插管前準備 (Pre-intubation)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="prep_imp_1" data-category="插管前準備" data-type="improvement">
+                        <label for="prep_imp_1">
+                            <textarea class="editable-text" rows="1">備物不完整，需要先準備好所有器械</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="prep_imp_2" data-category="插管前準備" data-type="improvement">
+                        <label for="prep_imp_2">
+                            <textarea class="editable-text" rows="1">器械名稱不熟悉(endo size: 男7.5-8, 女7-7.5; blade 3/4)</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="prep_imp_3" data-category="插管前準備" data-type="improvement">
+                        <label for="prep_imp_3">
+                            <textarea class="editable-text" rows="1">preoxygenation不完整，應給予2-3分鐘</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="prep_imp_4" data-category="插管前準備" data-type="improvement">
+                        <label for="prep_imp_4">
+                            <textarea class="editable-text" rows="1">擺位不當，忘記備中單等細節</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="prep_imp_5" data-category="插管前準備" data-type="improvement">
+                        <label for="prep_imp_5">
+                            <textarea class="editable-text" rows="1">未檢查有無漏氣(CE, VE手勢)</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="prep_custom_1" data-category="插管前準備" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="prep_good_1" data-category="插管前準備" data-type="good">
+                        <label for="prep_good_1">
+                            <textarea class="editable-text" rows="1">插管前準備充分，器械齊全</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="prep_good_2" data-category="插管前準備" data-type="good">
+                        <label for="prep_good_2">
+                            <textarea class="editable-text" rows="1">器械選擇適當，規格正確</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="prep_good_3" data-category="插管前準備" data-type="good">
+                        <label for="prep_good_3">
+                            <textarea class="editable-text" rows="1">preoxygenation執行完整</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="prep_good_4" data-category="插管前準備" data-type="good">
+                        <label for="prep_good_4">
+                            <textarea class="editable-text" rows="1">病人擺位正確，準備工作細心</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="prep_good_5" data-category="插管前準備" data-type="good">
+                        <label for="prep_good_5">
+                            <textarea class="editable-text" rows="1">團隊溝通良好，準備有條不紊</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>藥物給予 (Medication)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="med_imp_1" data-category="藥物給予" data-type="improvement">
+                        <label for="med_imp_1">
+                            <textarea class="editable-text" rows="1">插管前未確認血壓</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="med_imp_2" data-category="藥物給予" data-type="improvement">
+                        <label for="med_imp_2">
+                            <textarea class="editable-text" rows="1">藥物劑量不熟悉: Propofol 1mg/kg, Dormicum 0.1-0.3mg/kg</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="med_imp_3" data-category="藥物給予" data-type="improvement">
+                        <label for="med_imp_3">
+                            <textarea class="editable-text" rows="1">肌肉鬆弛劑: Succinyl 1.5mg/kg, Rocuronium 1mg/kg</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="med_imp_4" data-category="藥物給予" data-type="improvement">
+                        <label for="med_imp_4">
+                            <textarea class="editable-text" rows="1">未確認體重就給藥</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="med_imp_5" data-category="藥物給予" data-type="improvement">
+                        <label for="med_imp_5">
+                            <textarea class="editable-text" rows="1">NS 500 challenge給予時機不當(需有休克證據)</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="med_custom_1" data-category="藥物給予" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="med_good_1" data-category="藥物給予" data-type="good">
+                        <label for="med_good_1">
+                            <textarea class="editable-text" rows="1">插管前確實監測血壓</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="med_good_2" data-category="藥物給予" data-type="good">
+                        <label for="med_good_2">
+                            <textarea class="editable-text" rows="1">藥物劑量計算正確</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="med_good_3" data-category="藥物給予" data-type="good">
+                        <label for="med_good_3">
+                            <textarea class="editable-text" rows="1">給藥時機掌握得當</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="med_good_4" data-category="藥物給予" data-type="good">
+                        <label for="med_good_4">
+                            <textarea class="editable-text" rows="1">體重確認無誤，用藥安全</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="med_good_5" data-category="藥物給予" data-type="good">
+                        <label for="med_good_5">
+                            <textarea class="editable-text" rows="1">藥物選擇合適，考量病人狀況</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>插管技術 (Intubation Technique)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tech_imp_1" data-category="插管技術" data-type="improvement">
+                        <label for="tech_imp_1">
+                            <textarea class="editable-text" rows="1">blade放置過深，應貼著舌頭不要太深</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tech_imp_2" data-category="插管技術" data-type="improvement">
+                        <label for="tech_imp_2">
+                            <textarea class="editable-text" rows="1">插管過程中血氧下降處理不當，應好好bagging</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tech_imp_3" data-category="插管技術" data-type="improvement">
+                        <label for="tech_imp_3">
+                            <textarea class="editable-text" rows="1">插管技巧需要更多練習</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tech_imp_4" data-category="插管技術" data-type="improvement">
+                        <label for="tech_imp_4">
+                            <textarea class="editable-text" rows="1">視野暴露不佳，需改善喉頭技巧</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="tech_imp_5" data-category="插管技術" data-type="improvement">
+                        <label for="tech_imp_5">
+                            <textarea class="editable-text" rows="1">插管時間過長，動作不夠流暢</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="tech_custom_1" data-category="插管技術" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tech_good_1" data-category="插管技術" data-type="good">
+                        <label for="tech_good_1">
+                            <textarea class="editable-text" rows="1">插管技術純熟，動作流暢</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tech_good_2" data-category="插管技術" data-type="good">
+                        <label for="tech_good_2">
+                            <textarea class="editable-text" rows="1">喉頭使用正確，視野暴露良好</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tech_good_3" data-category="插管技術" data-type="good">
+                        <label for="tech_good_3">
+                            <textarea class="editable-text" rows="1">插管過程穩定，維持血氧良好</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tech_good_4" data-category="插管技術" data-type="good">
+                        <label for="tech_good_4">
+                            <textarea class="editable-text" rows="1">一次插管成功，技巧優良</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="tech_good_5" data-category="插管技術" data-type="good">
+                        <label for="tech_good_5">
+                            <textarea class="editable-text" rows="1">插管過程中注意病人安全</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>插管後評估 (Post-intubation)</h3>
+                <div class="item-group">
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="post_imp_1" data-category="插管後評估" data-type="improvement">
+                        <label for="post_imp_1">
+                            <textarea class="editable-text" rows="1">未監測插管後生命徵象(特別是血壓)</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="post_imp_2" data-category="插管後評估" data-type="improvement">
+                        <label for="post_imp_2">
+                            <textarea class="editable-text" rows="1">End-tidal CO2監測與判讀不熟(看位置、波形、數字)</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="post_imp_3" data-category="插管後評估" data-type="improvement">
+                        <label for="post_imp_3">
+                            <textarea class="editable-text" rows="1">未安排follow-up CXR確認深度與併發症</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="post_imp_4" data-category="插管後評估" data-type="improvement">
+                        <label for="post_imp_4">
+                            <textarea class="editable-text" rows="1">管路固定不確實</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item improvement">
+                        <input type="checkbox" id="post_imp_5" data-category="插管後評估" data-type="improvement">
+                        <label for="post_imp_5">
+                            <textarea class="editable-text" rows="1">呼吸器設定不當</textarea>
+                        </label>
+                    </div>
+                    <div class="custom-item">
+                        <input type="checkbox" id="post_custom_1" data-category="插管後評估" data-type="improvement">
+                        <input type="text" placeholder="請輸入其他需要改進的項目..." data-custom="true">
+                    </div>
+                </div>
+                
+                <hr class="section-divider">
+                
+                <div class="item-group">
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="post_good_1" data-category="插管後評估" data-type="good">
+                        <label for="post_good_1">
+                            <textarea class="editable-text" rows="1">插管後評估完整，生命徵象監測確實</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="post_good_2" data-category="插管後評估" data-type="good">
+                        <label for="post_good_2">
+                            <textarea class="editable-text" rows="1">End-tidal CO2監測與判讀正確</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="post_good_3" data-category="插管後評估" data-type="good">
+                        <label for="post_good_3">
+                            <textarea class="editable-text" rows="1">聽診確認管路位置技巧不錯，繼續保持</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="post_good_4" data-category="插管後評估" data-type="good">
+                        <label for="post_good_4">
+                            <textarea class="editable-text" rows="1">CXR判讀能力佳，深度評估正確</textarea>
+                        </label>
+                    </div>
+                    <div class="checkbox-item good">
+                        <input type="checkbox" id="post_good_5" data-category="插管後評估" data-type="good">
+                        <label for="post_good_5">
+                            <textarea class="editable-text" rows="1">管路固定確實，後續照護安排妥當</textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="advice-section">
+            <h3>學習建議選項</h3>
+            <div class="advice-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="advice_intubation" data-advice="intubation">
+                    <label for="advice_intubation">插管技能</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="advice_handover" data-advice="handover">
+                    <label for="advice_handover">交班技巧</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="advice_respiratory" data-advice="respiratory">
+                    <label for="advice_respiratory">呼吸評估</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="advice_clinical_thinking" data-advice="clinical-thinking">
+                    <label for="advice_clinical_thinking">臨床思維</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="advice_physical_exam" data-advice="physical-exam">
+                    <label for="advice_physical_exam">理學檢查</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h2>三、整體表現評估</h2>
+            
+            <h3>EPA評分 (呼吸困難評估)</h3>
+            <div class="radio-group">
+                <div class="radio-item" onclick="selectRadio('resp_epa', '1')">
+                    <input type="radio" name="resp_epa" value="1" id="resp_epa_1">
+                    <label for="resp_epa_1">等級一 - 觀察即可，不可操作</label>
+                </div>
+                <div class="radio-item" onclick="selectRadio('resp_epa', '2')">
+                    <input type="radio" name="resp_epa" value="2" id="resp_epa_2">
+                    <label for="resp_epa_2">等級二 - 直接、主動監督下執行</label>
+                </div>
+                <div class="radio-item" onclick="selectRadio('resp_epa', '3')">
+                    <input type="radio" name="resp_epa" value="3" id="resp_epa_3">
+                    <label for="resp_epa_3">等級三 - 間接、反應性監督下執行</label>
+                </div>
+                <div class="radio-item" onclick="selectRadio('resp_epa', '4')">
+                    <input type="radio" name="resp_epa" value="4" id="resp_epa_4">
+                    <label for="resp_epa_4">等級四 - 獨立操作執行，事後確認即可</label>
+                </div>
+                <div class="radio-item" onclick="selectRadio('resp_epa', '5')">
+                    <input type="radio" name="resp_epa" value="5" id="resp_epa_5">
+                    <label for="resp_epa_5">等級五 - 對資淺學員進行監督教學</label>
+                </div>
+            </div>
+
+            <h3>EPA評分 (氣管內管插管)</h3>
+            <div class="radio-group">
+                <div class="radio-item" onclick="selectRadio('intub_epa', '1')">
+                    <input type="radio" name="intub_epa" value="1" id="intub_epa_1">
+                    <label for="intub_epa_1">等級一 - 觀察即可，不可操作</label>
+                </div>
+                <div class="radio-item" onclick="selectRadio('intub_epa', '2')">
+                    <input type="radio" name="intub_epa" value="2" id="intub_epa_2">
+                    <label for="intub_epa_2">等級二 - 直接、主動監督下執行</label>
+                </div>
+                <div class="radio-item" onclick="selectRadio('intub_epa', '3')">
+                    <input type="radio" name="intub_epa" value="3" id="intub_epa_3">
+                    <label for="intub_epa_3">等級三 - 間接、反應性監督下執行</label>
+                </div>
+                <div class="radio-item" onclick="selectRadio('intub_epa', '4')">
+                    <input type="radio" name="intub_epa" value="4" id="intub_epa_4">
+                    <label for="intub_epa_4">等級四 - 獨立操作執行，事後確認即可</label>
+                </div>
+                <div class="radio-item" onclick="selectRadio('intub_epa', '5')">
+                    <input type="radio" name="intub_epa" value="5" id="intub_epa_5">
+                    <label for="intub_epa_5">等級五 - 對資淺學員進行監督教學</label>
+                </div>
+            </div>
+
+            <h3>額外建議</h3>
+            <textarea id="additional-comments" placeholder="請輸入其他具體建議或觀察到的優點..."></textarea>
+        </div>
+
+        <div class="buttons">
+            <button class="btn-generate" onclick="generateReport()">生成評估報告</button>
+            <button class="btn-clear" onclick="clearForm()">清除表單</button>
+        </div>
+
+        <div id="report"></div>
+        <div class="report-buttons">
+            <button class="btn-save" onclick="saveReport()">儲存報告</button>
+            <button class="btn-copy" onclick="copyReport()">複製報告</button>
+        </div>
+    </div>
+
+    <script>
+        // 儲存原始內容
+        const originalContent = {};
+        
+        // 選中的建議類型
+        const selectedAdvices = new Set();
+
+        // 設定今日日期
+        document.getElementById('eval-date').valueAsDate = new Date();
+
+        // 建議內容對應
+        const adviceContent = {
+            'intubation': {
+                title: '插管技能重點提醒',
+                content: [
+                    '插管前：確認血壓、體重、充分preoxygenation (2-3分鐘)',
+                    '藥物劑量：Propofol 1mg/kg, Dormicum 0.1-0.3mg/kg',
+                    '肌鬆劑：Succinyl 1.5mg/kg, Rocuronium 1mg/kg',
+                    '管徑選擇：男性7.5-8, 女性7-7.5',
+                    '插管後：監測生命徵象、確認End-tidal CO2、安排CXR'
+                ]
+            },
+            'handover': {
+                title: '交班技巧 (ISBAR結構)',
+                content: [
+                    'I — Introduction / Identify：自我介紹並確認病人身分',
+                    'S — Situation：說明目前的情況或交班重點',
+                    'B — Background：交代病人背景與相關病史',
+                    'A — Assessment：提供評估與目前檢查結果',
+                    'R — Recommendation：提出建議、需求或後續計畫'
+                ]
+            },
+            'respiratory': {
+                title: '呼吸評估重點',
+                content: [
+                    '病史收集：呼吸困難onset、誘發因子、伴隨症狀',
+                    '理學檢查：生命徵象、聽診、體液狀態評估',
+                    '檢查項目：ABG、lactate、CXR、必要時BNP',
+                    '氧氣治療：從適當FiO2開始，觀察反應後調整',
+                    '監測指標：SpO2、呼吸功、意識狀態變化'
+                ]
+            },
+            'clinical-thinking': {
+                title: '臨床思維發展',
+                content: [
+                    '病例報告結構：基本資料→評估發現→處置反應→臨床判斷→後續計畫',
+                    '鑑別診斷思考：急性呼吸衰竭原因分析 (PNA? HF? COPD AE?)',
+                    '治療優先序：ABC原則，生命徵象穩定優先',
+                    '團隊溝通：清楚表達需求與後續計畫',
+                    '持續學習：觀摩資深醫師、參與病例討論'
+                ]
+            },
+            'physical-exam': {
+                title: '理學檢查技巧提升',
+                content: [
+                    '系統性檢查：按照固定順序進行完整評估',
+                    '聽診技巧：練習辨識正常與異常呼吸音',
+                    '視診重點：注意病人整體外觀、呼吸型態',
+                    '觸診技巧：評估脈搏、水腫、淋巴結',
+                    '整合能力：將檢查發現與病史相互印證'
+                ]
+            }
+        };
+
+        // 儲存原始內容
+        document.addEventListener('DOMContentLoaded', function() {
+            // 儲存所有可編輯文本的原始內容
+            document.querySelectorAll('.editable-text').forEach(textarea => {
+                originalContent[textarea.closest('label').getAttribute('for')] = textarea.value;
+            });
+
+            // 處理預設checkbox
+            document.querySelectorAll('.checkbox-item input[type="checkbox"]:not([data-advice])').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const item = this.closest('.checkbox-item');
+                    if (item) {
+                        if (this.checked) {
+                            item.classList.add('checked');
+                        } else {
+                            item.classList.remove('checked');
+                        }
+                    }
+                });
+            });
+
+            // 處理自定義項目
+            document.querySelectorAll('.custom-item').forEach(item => {
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                const textInput = item.querySelector('input[type="text"]');
+                
+                if (textInput && checkbox) {
+                    textInput.addEventListener('input', function() {
+                        if (this.value.trim()) {
+                            checkbox.disabled = false;
+                        } else {
+                            checkbox.disabled = true;
+                            checkbox.checked = false;
+                        }
+                    });
+                }
+            });
+
+            // 為所有radio item添加點擊事件
+            document.querySelectorAll('.radio-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    if (radio) {
+                        const name = radio.name;
+                        const value = radio.value;
+                        selectRadio(name, value);
+                    }
+                });
+            });
+
+            // 為建議選項的checkbox添加事件監聽
+            document.querySelectorAll('.advice-group input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const adviceType = this.getAttribute('data-advice');
+                    if (this.checked) {
+                        selectedAdvices.add(adviceType);
+                    } else {
+                        selectedAdvices.delete(adviceType);
+                    }
+                });
+            });
+
+
+            // 自動調整textarea高度
+            document.querySelectorAll('.editable-text').forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = this.scrollHeight + 'px';
+                });
+                // 初始化高度
+                textarea.style.height = 'auto';
+                textarea.style.height = textarea.scrollHeight + 'px';
+            });
+        });
+
+        function selectRadio(name, value) {
+            const radios = document.querySelectorAll(`input[name="${name}"]`);
+            radios.forEach(radio => {
+                const item = radio.closest('.radio-item');
+                if (item) {
+                    if (radio.value === value) {
+                        radio.checked = true;
+                        item.classList.add('selected');
+                    } else {
+                        radio.checked = false;
+                        item.classList.remove('selected');
+                    }
+                }
+            });
+        }
+        
+        function generateReport() {
+            const studentName = document.getElementById('student-name').value || "未填寫";
+            const evaluator = document.getElementById('evaluator').value || "未填寫";
+            const evalDate = document.getElementById('eval-date').value || "未填寫";
+            
+            let report = `PGY學員臨床技能評估報告\n`;
+            report += `=================================================\n`;
+            report += `學員：${studentName}\n`;
+            report += `評估者：${evaluator}\n`;
+            report += `評估日期：${evalDate}\n\n`;
+
+            // 收集需要改進的項目，按類別分組
+            const improvementsByCategory = {};
+            const goodItemsByCategory = {};
+
+            // 處理預設項目
+            document.querySelectorAll('.checkbox-item input[type="checkbox"]:checked').forEach(item => {
+                // 排除建議選項
+                if (item.getAttribute('data-advice')) return;
+
+                const category = item.getAttribute('data-category');
+                const type = item.getAttribute('data-type');
+                const textarea = item.parentElement.querySelector('.editable-text');
+                const text = textarea ? textarea.value.trim() : item.nextElementSibling.textContent.trim();
+                
+                if (type === 'improvement') {
+                    if (!improvementsByCategory[category]) {
+                        improvementsByCategory[category] = [];
+                    }
+                    improvementsByCategory[category].push(text);
+                } else if (type === 'good') {
+                    if (!goodItemsByCategory[category]) {
+                        goodItemsByCategory[category] = [];
+                    }
+                    goodItemsByCategory[category].push(text);
+                }
+            });
+
+            // 處理自定義項目
+            document.querySelectorAll('.custom-item input[type="checkbox"]:checked').forEach(item => {
+                const category = item.getAttribute('data-category');
+                const type = item.getAttribute('data-type');
+                const textInput = item.parentElement.querySelector('input[type="text"]');
+                const text = textInput ? textInput.value.trim() : '';
+                
+                if (text) {
+                    if (type === 'improvement') {
+                        if (!improvementsByCategory[category]) {
+                            improvementsByCategory[category] = [];
+                        }
+                        improvementsByCategory[category].push(text);
+                    } else if (type === 'good') {
+                        if (!goodItemsByCategory[category]) {
+                            goodItemsByCategory[category] = [];
+                        }
+                        goodItemsByCategory[category].push(text);
+                    }
+                }
+            });
+
+            // 需要改進的項目，按類別分組顯示
+            if (Object.keys(improvementsByCategory).length > 0) {
+                report += `=================\n`;
+                report += `需要改進的項目：\n`;
+                Object.keys(improvementsByCategory).forEach(category => {
+                    report += `【${category}】\n`;
+                    improvementsByCategory[category].forEach(item => {
+                        report += `• ${item}\n`;
+                    });
+                    report += `\n`;
+                });
+            }
+
+            // 表現良好的部分，按類別分組顯示
+            if (Object.keys(goodItemsByCategory).length > 0) {
+                report += `=================\n`;
+                report += `表現良好的部分：\n`;
+                Object.keys(goodItemsByCategory).forEach(category => {
+                    report += `【${category}】\n`;
+                    goodItemsByCategory[category].forEach(item => {
+                        report += `• ${item}\n`;
+                    });
+                    report += `\n`;
+                });
+            }
+
+            // EPA評分
+            const respEpa = document.querySelector('input[name="resp_epa"]:checked');
+            const intubEpa = document.querySelector('input[name="intub_epa"]:checked');
+            
+            report += `=========\n`;
+            report += `EPA評分：\n`;
+            report += `呼吸困難評估：${respEpa ? '等級' + respEpa.value : '未評分'}\n`;
+            report += `氣管內管插管：${intubEpa ? '等級' + intubEpa.value : '未評分'}\n\n`;
+
+            // 學習建議 (根據選擇的按鈕)
+            if (selectedAdvices.size > 0) {
+                report += `=========\n`;
+                report += `學習建議：\n`;
+                selectedAdvices.forEach(adviceType => {
+                    const advice = adviceContent[adviceType];
+                    if (advice) {
+                        report += `${advice.title}：\n`;
+                        advice.content.forEach(item => {
+                            report += `• ${item}\n`;
+                        });
+                        report += `\n`;
+                    }
+                });
+            }
+
+            // 額外建議
+            const additionalComments = document.getElementById('additional-comments').value;
+            if (additionalComments.trim()) {
+                report += `=========\n`;
+                report += `額外建議：\n`;
+                report += `${additionalComments}\n\n`;
+            }
+            
+            document.getElementById('report').textContent = report;
+            document.getElementById('report').style.display = 'block';
+            document.querySelector('.report-buttons').style.display = 'block';
+            
+            // 滾動到報告區域
+            document.getElementById('report').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function saveReport() {
+            const reportContent = document.getElementById('report').textContent;
+            const studentName = document.getElementById('student-name').value || "未命名學員";
+            const evalDate = document.getElementById('eval-date').value || new Date().toISOString().split('T')[0];
+            
+            const blob = new Blob([reportContent], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `PGY評估報告_${studentName}_${evalDate}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            alert('評估報告已儲存！');
+        }
+
+        function copyReport() {
+            const reportContent = document.getElementById('report').textContent;
+            navigator.clipboard.writeText(reportContent).then(() => {
+                alert('報告內容已複製到剪貼簿！');
+            }).catch(err => {
+                console.error('複製失敗:', err);
+                // 備用方法
+                const textArea = document.createElement('textarea');
+                textArea.value = reportContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('報告內容已複製到剪貼簿！');
+            });
+        }
+
+        function clearForm() {
+            if (confirm('確定要重設表單內容嗎？')) {
+                // 清除文字輸入 (保留日期)
+                document.querySelectorAll('input[type="text"]').forEach(input => {
+                    input.value = '';
+                });
+                
+                document.getElementById('student-name').value = '';
+                document.getElementById('evaluator').value = '';
+                document.getElementById('additional-comments').value = '';
+                
+                // 清除checkbox並恢復原始文字內容
+                document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                    checkbox.checked = false;
+                    const item = checkbox.closest('.checkbox-item');
+                    if (item) {
+                        item.classList.remove('checked');
+                    }
+                });
+                
+                // 恢復可編輯文本的原始內容
+                document.querySelectorAll('.editable-text').forEach(textarea => {
+                    const id = textarea.closest('label').getAttribute('for');
+                    if (originalContent[id] !== undefined) {
+                        textarea.value = originalContent[id];
+                        textarea.style.height = 'auto';
+                        textarea.style.height = textarea.scrollHeight + 'px';
+                    }
+                });
+                
+                // 清除radio buttons
+                document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                    radio.checked = false;
+                    const item = radio.closest('.radio-item');
+                    if (item) {
+                        item.classList.remove('selected');
+                    }
+                });
+                
+                // 清除自定義項目
+                document.querySelectorAll('.custom-item input[type="text"]').forEach(input => {
+                    input.value = '';
+                });
+                
+                document.querySelectorAll('.custom-item input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.disabled = true;
+                    checkbox.checked = false;
+                });
+                
+                // 清除建議選項
+                selectedAdvices.clear();
+                document.querySelectorAll('.advice-group input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                
+                // 隱藏報告
+                document.getElementById('report').style.display = 'none';
+                document.querySelector('.report-buttons').style.display = 'none';
+                
+                // 重設日期
+                document.getElementById('eval-date').valueAsDate = new Date();
+                
+                alert('表單已重設！');
+            }
+        }
+    </script>
+</body>
+</html>
