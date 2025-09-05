@@ -9,111 +9,223 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            font-size: 14px;
         }
+        
+        /* 手機版調整 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                font-size: 14px;
+            }
+        }
+        
         .container {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 15px;
+            padding: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
         }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 10px;
+                padding: 15px;
+            }
+        }
+        
         h1 {
             text-align: center;
             color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 28px;
+            margin-bottom: 20px;
+            font-size: 24px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
         }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+        }
+        
         .info-section {
             background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             border-left: 4px solid #007bff;
         }
+        
+        @media (max-width: 768px) {
+            .info-section {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+        }
+        
         .info-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
+        
         @media (max-width: 768px) {
             .info-row {
                 grid-template-columns: 1fr;
+                gap: 10px;
             }
         }
+        
         .section {
             background: white;
-            margin: 20px 0;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             border: 1px solid #e9ecef;
         }
+        
+        @media (max-width: 768px) {
+            .section {
+                margin: 10px 0;
+                padding: 15px;
+                border-radius: 8px;
+            }
+        }
+        
         .section h2 {
             color: #495057;
             border-bottom: 3px solid #007bff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 22px;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            line-height: 1.3;
         }
+        
+        @media (max-width: 768px) {
+            .section h2 {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+        }
+        
         .section h3 {
             color: #6c757d;
-            margin: 20px 0 10px 0;
-            font-size: 18px;
+            margin: 15px 0 8px 0;
+            font-size: 16px;
             font-weight: 600;
+            line-height: 1.3;
         }
+        
+        @media (max-width: 768px) {
+            .section h3 {
+                font-size: 15px;
+                margin: 12px 0 8px 0;
+            }
+        }
+        
         .subsection {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
+        
+        @media (max-width: 768px) {
+            .subsection {
+                margin-bottom: 20px;
+            }
+        }
+        
         .item-group {
             display: grid;
-            gap: 8px;
-            margin: 15px 0;
+            gap: 6px;
+            margin: 12px 0;
         }
+        
         .checkbox-item {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 10px;
             border: 1px solid #dee2e6;
-            border-radius: 8px;
+            border-radius: 6px;
             transition: all 0.3s ease;
             background: #f8f9fa;
-            min-height: 24px;
+            min-height: auto;
         }
+        
+        @media (max-width: 768px) {
+            .checkbox-item {
+                padding: 8px;
+                gap: 6px;
+                align-items: flex-start;
+            }
+        }
+        
         .checkbox-item.improvement {
             border-left: 4px solid #dc3545;
         }
+        
         .checkbox-item.good {
             border-left: 4px solid #28a745;
         }
+        
         .checkbox-item:hover {
             transform: translateY(-1px);
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
+        
+        @media (max-width: 768px) {
+            .checkbox-item:hover {
+                transform: none;
+            }
+        }
+        
         .checkbox-item.checked.improvement {
             border-color: #dc3545;
             background: #fff5f5;
         }
+        
         .checkbox-item.checked.good {
             border-color: #28a745;
             background: #f0fff4;
         }
+        
         input[type="checkbox"] {
             margin: 0;
-            transform: scale(1.2);
+            transform: scale(1.1);
             flex-shrink: 0;
+            margin-top: 2px;
         }
+        
+        @media (max-width: 768px) {
+            input[type="checkbox"] {
+                transform: scale(1.0);
+                margin-top: 1px;
+            }
+        }
+        
         .checkbox-item label {
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.4;
             cursor: pointer;
             flex: 1;
             margin: 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
+        
+        @media (max-width: 768px) {
+            .checkbox-item label {
+                font-size: 12px;
+                line-height: 1.3;
+            }
+        }
+        
         .editable-text {
             background: transparent;
             border: none;
@@ -123,198 +235,422 @@
             width: 100%;
             resize: none;
             padding: 0;
-            min-height: 20px;
+            min-height: 18px;
+            word-wrap: break-word;
         }
+        
         .editable-text:focus {
             outline: 1px solid #007bff;
             background: white;
             border-radius: 3px;
             padding: 3px;
         }
+        
         .custom-item {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 10px;
             border: 2px dashed #dee2e6;
-            border-radius: 8px;
+            border-radius: 6px;
             background: #f8f9fa;
-            margin: 10px 0;
-            min-height: 24px;
+            margin: 8px 0;
+            min-height: auto;
             border-left: 4px solid #dc3545;
         }
+        
+        @media (max-width: 768px) {
+            .custom-item {
+                padding: 8px;
+                gap: 6px;
+                align-items: flex-start;
+            }
+        }
+        
         .custom-item input[type="text"] {
             flex: 1;
             border: none;
             background: transparent;
-            font-size: 14px;
-            padding: 5px;
+            font-size: 12px;
+            padding: 3px;
+            word-wrap: break-word;
         }
+        
         .custom-item input[type="text"]:focus {
             outline: none;
             background: white;
             border-radius: 3px;
         }
+        
         .radio-group {
             display: flex;
-            gap: 15px;
-            margin: 15px 0;
+            gap: 8px;
+            margin: 12px 0;
             flex-wrap: wrap;
         }
+        
+        @media (max-width: 768px) {
+            .radio-group {
+                gap: 6px;
+                margin: 10px 0;
+            }
+        }
+        
         .radio-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 15px;
+            gap: 6px;
+            padding: 8px 12px;
             border: 1px solid #dee2e6;
-            border-radius: 25px;
+            border-radius: 20px;
             transition: all 0.3s ease;
             cursor: pointer;
             background: #f8f9fa;
-            font-size: 13px;
+            font-size: 12px;
+            line-height: 1.2;
+            word-wrap: break-word;
+            flex: 1;
+            min-width: 0;
         }
+        
+        @media (max-width: 768px) {
+            .radio-item {
+                padding: 6px 10px;
+                font-size: 11px;
+                border-radius: 15px;
+                min-width: 120px;
+                flex-basis: calc(50% - 3px);
+                justify-content: center;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .radio-item {
+                flex-basis: 100%;
+                min-width: auto;
+            }
+        }
+        
         .radio-item:hover {
             border-color: #007bff;
             background: #e3f2fd;
         }
+        
         .radio-item.selected {
             border-color: #007bff;
             background: #007bff;
             color: white;
         }
+        
         input[type="radio"] {
             margin: 0;
+            flex-shrink: 0;
         }
+        
         textarea {
             width: 100%;
-            min-height: 80px;
-            padding: 15px;
+            min-height: 70px;
+            padding: 12px;
             border: 1px solid #dee2e6;
-            border-radius: 8px;
+            border-radius: 6px;
             resize: vertical;
             font-family: inherit;
-            font-size: 14px;
+            font-size: 13px;
             transition: border-color 0.3s ease;
+            line-height: 1.4;
         }
+        
+        @media (max-width: 768px) {
+            textarea {
+                min-height: 60px;
+                padding: 10px;
+                font-size: 12px;
+            }
+        }
+        
         textarea:focus {
             outline: none;
             border-color: #007bff;
             box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
         }
+        
         .buttons {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
         }
+        
+        @media (max-width: 768px) {
+            .buttons {
+                margin-top: 20px;
+                gap: 8px;
+                flex-direction: column;
+            }
+        }
+        
         button {
-            padding: 12px 30px;
+            padding: 10px 25px;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-height: 44px;
         }
+        
+        @media (max-width: 768px) {
+            button {
+                padding: 12px 20px;
+                font-size: 14px;
+                border-radius: 15px;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+        
         .btn-generate {
             background: linear-gradient(45deg, #28a745, #20c997);
             color: white;
         }
+        
         .btn-generate:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
         }
+        
+        @media (max-width: 768px) {
+            .btn-generate:hover {
+                transform: none;
+            }
+        }
+        
         .btn-clear {
             background: linear-gradient(45deg, #6c757d, #495057);
             color: white;
         }
+        
         .btn-clear:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
         }
+        
+        @media (max-width: 768px) {
+            .btn-clear:hover {
+                transform: none;
+            }
+        }
+        
         .btn-save {
             background: linear-gradient(45deg, #007bff, #0056b3);
             color: white;
         }
+        
         .btn-save:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
         }
+        
+        @media (max-width: 768px) {
+            .btn-save:hover {
+                transform: none;
+            }
+        }
+        
         .btn-copy {
             background: linear-gradient(45deg, #fd7e14, #e55100);
             color: white;
         }
+        
         .btn-copy:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(253, 126, 20, 0.3);
         }
+        
+        @media (max-width: 768px) {
+            .btn-copy:hover {
+                transform: none;
+            }
+        }
+        
         #report {
             background: #f8f9fa;
             border: 2px solid #dee2e6;
-            border-radius: 10px;
-            padding: 25px;
-            margin-top: 25px;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
             white-space: pre-line;
-            line-height: 1.6;
-            font-size: 14px;
+            line-height: 1.5;
+            font-size: 13px;
             display: none;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
+        
+        @media (max-width: 768px) {
+            #report {
+                padding: 15px;
+                margin-top: 15px;
+                font-size: 12px;
+                border-radius: 6px;
+            }
+        }
+        
         #report h3 {
             color: #007bff;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            margin-top: 15px;
+            margin-bottom: 8px;
         }
+        
         .input-group {
-            margin: 15px 0;
+            margin: 12px 0;
         }
+        
+        @media (max-width: 768px) {
+            .input-group {
+                margin: 10px 0;
+            }
+        }
+        
         .input-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 600;
             color: #495057;
+            font-size: 13px;
         }
+        
+        @media (max-width: 768px) {
+            .input-group label {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+        }
+        
         input[type="text"], input[type="date"] {
             width: 100%;
-            max-width: 300px;
-            padding: 10px;
+            max-width: 250px;
+            padding: 8px;
             border: 1px solid #dee2e6;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 4px;
+            font-size: 13px;
+            box-sizing: border-box;
         }
+        
+        @media (max-width: 768px) {
+            input[type="text"], input[type="date"] {
+                max-width: 100%;
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+        
         .section-divider {
             border: none;
             height: 2px;
             background: linear-gradient(to right, #dc3545, #28a745);
-            margin: 20px 0;
+            margin: 15px 0;
         }
+        
+        @media (max-width: 768px) {
+            .section-divider {
+                margin: 12px 0;
+            }
+        }
+        
         .report-buttons {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             display: none;
         }
+        
+        @media (max-width: 768px) {
+            .report-buttons {
+                margin-top: 12px;
+            }
+        }
+        
         .advice-section {
             background: white;
-            margin: 20px 0;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             border: 1px solid #e9ecef;
         }
+        
+        @media (max-width: 768px) {
+            .advice-section {
+                margin: 10px 0;
+                padding: 15px;
+                border-radius: 8px;
+            }
+        }
+        
         .advice-section h3 {
             color: #495057;
             border-bottom: 3px solid #007bff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 18px;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
+        
+        @media (max-width: 768px) {
+            .advice-section h3 {
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+        }
+        
         .advice-group {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .advice-group {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+                margin-top: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .advice-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 確保觸控友好的最小尺寸 */
+        @media (max-width: 768px) {
+            .checkbox-item, .radio-item, button, input, textarea {
+                min-height: 40px;
+            }
+            
+            .checkbox-item label, .radio-item {
+                min-height: auto;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+        }
+        
+        /* 防止縮放導致的佈局問題 */
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* 長文字換行處理 */
+        .checkbox-item label, .radio-item, .custom-item input[type="text"] {
+            word-break: break-word;
+            hyphens: auto;
         }
     </style>
 </head>
@@ -367,13 +703,13 @@
                     <div class="checkbox-item improvement">
                         <input type="checkbox" id="hx_imp_4" data-category="病史收集" data-type="improvement">
                         <label for="hx_imp_4">
-                            <textarea class="editable-text" rows="1">如果有擔心的疾病，可針對其合併的症狀做詢問</textarea>
+                            <textarea class="editable-text" rows="1">如果有擔心的疾病，可重點針其併發的症狀做詢問</textarea>
                         </label>
                     </div>
                     <div class="checkbox-item improvement">
                         <input type="checkbox" id="hx_imp_5" data-category="病史收集" data-type="improvement">
                         <label for="hx_imp_5">
-                            <textarea class="editable-text" rows="1">在病人出現危急況狀時，需要以快速、重點的方式來取得資訊</textarea>
+                            <textarea class="editable-text" rows="1">在病人出現危急狀況時，需要以快速、重點的方式來取得資訊</textarea>
                         </label>
                     </div>
                     <div class="custom-item">
@@ -394,9 +730,10 @@
                     <div class="checkbox-item good">
                         <input type="checkbox" id="hx_good_2" data-category="病史收集" data-type="good">
                         <label for="hx_good_2">
-                            <textarea class="editable-text" rows="1">能夠針對可能的診斷進行相關病史詢問</textarea>
+                            <textarea class="editable-text" rows="1">能夠重點針對可能的診斷進行相關病史詢問</textarea>
                         </label>
                     </div>
+                </div>
             </div>
 
             <div class="subsection">
@@ -450,7 +787,7 @@
                     <div class="checkbox-item good">
                         <input type="checkbox" id="pe_good_2" data-category="理學檢查" data-type="good">
                         <label for="pe_good_2">
-                            <textarea class="editable-text" rows="1">能夠針對症狀進行重點檢查</textarea>
+                            <textarea class="editable-text" rows="1">能夠重點針對症狀進行重點檢查</textarea>
                         </label>
                     </div>
                 </div>
@@ -549,7 +886,7 @@
                     <div class="checkbox-item improvement">
                         <input type="checkbox" id="lab_imp_5" data-category="檢驗檢查" data-type="improvement">
                         <label for="lab_imp_5">
-                            <textarea class="editable-text" rows="1">檢查項目選擇缺乏針對性</textarea>
+                            <textarea class="editable-text" rows="1">檢查項目選擇缺乏重點性</textarea>
                         </label>
                     </div>
                     <div class="custom-item">
@@ -742,7 +1079,7 @@
                     <div class="checkbox-item improvement">
                         <input type="checkbox" id="med_imp_5" data-category="藥物給予" data-type="improvement">
                         <label for="med_imp_5">
-                            <textarea class="editable-text" rows="1">常規給予Challenge fluid (如NS 500ml) 時機不當，應有休克或體液不足等證據支持</textarea>
+                            <textarea class="editable-text" rows="1">常要給予Challenge fluid (如NS 500ml) 時機不當，應有休克或體液不足等證據支持</textarea>
                         </label>
                     </div>
                     <div class="custom-item">
@@ -928,7 +1265,6 @@
             </div>
         </div>
 
-
         <div class="section">
             <h2>三、整體表現評估</h2>
             
@@ -1053,7 +1389,7 @@
                     '聽診技巧：練習辨識正常與異常呼吸音',
                     '視診重點：注意病人整體外觀、呼吸型態',
                     '觸診技巧：評估脈搏、水腫、淋巴結',
-                    '整合能力：將檢查發現與病史相互印證'
+                    '整合能力：將檢查發現與病史相互對證'
                 ]
             }
         };
@@ -1120,7 +1456,6 @@
                 });
             });
 
-
             // 自動調整textarea高度
             document.querySelectorAll('.editable-text').forEach(textarea => {
                 textarea.addEventListener('input', function() {
@@ -1155,7 +1490,7 @@
             const evalDate = document.getElementById('eval-date').value || "未填寫";
             
             let report = `PGY學員臨床技能評估報告\n`;
-            report += `=================================================\n`;
+            report += `================\n`;
             report += `學員：${studentName}\n`;
             report += `評估者：${evaluator}\n`;
             report += `評估日期：${evalDate}\n\n`;
