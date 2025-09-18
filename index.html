@@ -457,12 +457,6 @@
             box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
         }
         
-        @media (max-width: 768px) {
-            .btn-save:hover {
-                transform: none;
-            }
-        }
-        
         .btn-copy {
             background: linear-gradient(45deg, #fd7e14, #e55100);
             color: white;
@@ -473,8 +467,28 @@
             box-shadow: 0 8px 25px rgba(253, 126, 20, 0.3);
         }
         
+        .btn-word {
+            background: linear-gradient(45deg, #2a579a, #1e3c66);
+            color: white;
+        }
+        
+        .btn-word:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(42, 87, 154, 0.3);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(45deg, #d32f2f, #b71c1c);
+            color: white;
+        }
+        
+        .btn-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.3);
+        }
+
         @media (max-width: 768px) {
-            .btn-copy:hover {
+            .btn-save:hover, .btn-copy:hover, .btn-word:hover, .btn-pdf:hover {
                 transform: none;
             }
         }
@@ -565,14 +579,17 @@
         }
         
         .report-buttons {
-            text-align: center;
-            margin-top: 15px;
             display: none;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
         }
         
         @media (max-width: 768px) {
             .report-buttons {
                 margin-top: 12px;
+                flex-direction: column;
             }
         }
         
@@ -651,6 +668,31 @@
         .checkbox-item label, .radio-item, .custom-item input[type="text"] {
             word-break: break-word;
             hyphens: auto;
+        }
+
+        /* 新增：用於列印的樣式 */
+        @media print {
+            body > *:not(#report) {
+                display: none;
+            }
+            #report, #report * {
+                display: block;
+                visibility: visible;
+            }
+            #report {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+                padding: 10px;
+                margin: 0;
+                font-size: 12pt;
+                color: black;
+                background: white;
+                white-space: pre-wrap;
+            }
         }
     </style>
 </head>
@@ -1327,7 +1369,9 @@
 
         <div id="report"></div>
         <div class="report-buttons">
-            <button class="btn-save" onclick="saveReport()">儲存報告</button>
+            <button class="btn-save" onclick="saveReport()">儲存為 TXT</button>
+            <button class="btn-word" onclick="saveAsWord()">儲存為 Word</button>
+            <button class="btn-pdf" onclick="printReport()">儲存為 PDF</button>
             <button class="btn-copy" onclick="copyReport()">複製報告</button>
         </div>
     </div>
@@ -1605,7 +1649,7 @@
             
             document.getElementById('report').textContent = report;
             document.getElementById('report').style.display = 'block';
-            document.querySelector('.report-buttons').style.display = 'block';
+            document.querySelector('.report-buttons').style.display = 'flex';
             
             // 滾動到報告區域
             document.getElementById('report').scrollIntoView({ behavior: 'smooth' });
@@ -1626,7 +1670,7 @@
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
             
-            alert('評估報告已儲存！');
+            alert('評估報告 TXT 檔已儲存！');
         }
 
         function copyReport() {
@@ -1644,6 +1688,93 @@
                 document.body.removeChild(textArea);
                 alert('報告內容已複製到剪貼簿！');
             });
+        }
+
+        // 新增：儲存為 Word
+        function saveAsWord() {
+            const reportContent = document.getElementById('report').textContent;
+            const studentName = document.getElementById('student-name').value || "未命名學員";
+            const evalDate = document.getElementById('eval-date').value || new Date().toISOString().split('T')[0];
+            
+            // 將純文字的換行符號轉換為 HTML 的 <br> 標籤
+            const reportHtml = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>評估報告</title></head><body>' +
+                               reportContent.replace(/\n/g, '<br>') +
+                               '</body></html>';
+            
+            const blob = new Blob([reportHtml], { type: 'application/msword' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `PGY評估報告_${studentName}_${evalDate}.doc`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            alert('Word 文檔已開始下載！');
+        }
+
+        // 修正：真正的PDF下載功能
+        function printReport() {
+            const reportContent = document.getElementById('report').textContent;
+            const studentName = document.getElementById('student-name').value || "未命名學員";
+            const evalDate = document.getElementById('eval-date').value || new Date().toISOString().split('T')[0];
+            
+            // 轉義特殊字符以避免語法錯誤
+            const escapedContent = reportContent.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // 創建一個新的視窗來生成PDF
+            const printWindow = window.open('', '_blank');
+            
+            if (printWindow) {
+                printWindow.document.open();
+                printWindow.document.write(`<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PGY評估報告_${studentName.replace(/[<>"'&]/g, '')}_${evalDate}</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+        h1 { 
+            color: #2c3e50; 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            font-size: 13px;
+            margin: 0;
+        }
+        @media print {
+            body { margin: 0; }
+            @page { margin: 1cm; }
+        }
+    </style>
+</head>
+<body>
+    <h1>PGY學員臨床技能評估報告</h1>
+    <pre>${escapedContent}</pre>
+</body>
+</html>`);
+                printWindow.document.close();
+                
+                // 等待內容載入後自動列印
+                printWindow.onload = function() {
+                    setTimeout(function() {
+                        printWindow.print();
+                    }, 500);
+                };
+            } else {
+                alert('無法開啟列印視窗，請檢查瀏覽器的彈出視窗設定');
+            }
         }
 
         function clearForm() {
