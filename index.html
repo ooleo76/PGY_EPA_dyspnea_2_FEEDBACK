@@ -46,7 +46,7 @@
         @media (max-width: 768px) { .checkbox-item label { font-size: 12px; line-height: 1.3; } }
         .editable-text { background: transparent; border: none; font-family: inherit; font-size: inherit; line-height: inherit; width: 100%; resize: none; padding: 0; min-height: 18px; word-wrap: break-word; }
         .editable-text:focus { outline: 1px solid #007bff; background: white; border-radius: 3px; padding: 3px; }
-        .custom-item { display: flex; align-items: flex-start; gap: 8px; padding: 10px; border: 2px dashed #dee2e6; border-radius: 6px; background: #f8f9fa; margin: 8px 0; min-height: auto; border-left: 4px solid #dc3545; }
+        .custom-item { display: flex; align-items: flex-start; gap: 8px; padding: 10px; border: 2px dashed #dee2e6; border-radius: 6px; background: #f8f9fa; min-height: auto; border-left: 4px solid #dc3545; }
         @media (max-width: 768px) { .custom-item { padding: 8px; gap: 6px; align-items: flex-start; } }
         .custom-item input[type="text"] { flex: 1; border: none; background: transparent; font-size: 12px; padding: 3px; word-wrap: break-word; }
         .custom-item input[type="text"]:focus { outline: none; background: white; border-radius: 3px; }
@@ -333,17 +333,17 @@
         <h2>三、整體表現評估</h2>
         <h3>EPA評分 (呼吸困難評估)</h3>
         <div class="radio-group">
-            <div class="radio-item" onclick="selectRadio('resp_epa','1')"><input type="radio" name="resp_epa" value="1" id="resp_epa_1"><label for="resp_epa_1">等級一 - 觀察即可，不可操作</label></div>
-            <div class="radio-item" onclick="selectRadio('resp_epa','2')"><input type="radio" name="resp_epa" value="2" id="resp_epa_2"><label for="resp_epa_2">等級二 - 直接、主動監督下執行</label></div>
-            <div class="radio-item" onclick="selectRadio('resp_epa','3')"><input type="radio" name="resp_epa" value="3" id="resp_epa_3"><label for="resp_epa_3">等級三 - 間接、反應性監督下執行</label></div>
+            <div class="radio-item" onclick="selectRadio('resp_epa','1')"><input type="radio" name="resp_epa" value="1" id="resp_epa_1"><label for="resp_epa_1">等級一 - 只能在旁邊看</label></div>
+            <div class="radio-item" onclick="selectRadio('resp_epa','2')"><input type="radio" name="resp_epa" value="2" id="resp_epa_2"><label for="resp_epa_2">等級二 - 需要直接監督才能完成</label></div>
+            <div class="radio-item" onclick="selectRadio('resp_epa','3')"><input type="radio" name="resp_epa" value="3" id="resp_epa_3"><label for="resp_epa_3">等級三 - 可以在間接監督下執行</label></div>
             <div class="radio-item" onclick="selectRadio('resp_epa','4')"><input type="radio" name="resp_epa" value="4" id="resp_epa_4"><label for="resp_epa_4">等級四 - 獨立操作執行，事後確認即可</label></div>
             <div class="radio-item" onclick="selectRadio('resp_epa','5')"><input type="radio" name="resp_epa" value="5" id="resp_epa_5"><label for="resp_epa_5">等級五 - 對資淺學員進行監督教學</label></div>
         </div>
         <h3>EPA評分 (氣管內管插管)</h3>
         <div class="radio-group">
-            <div class="radio-item" onclick="selectRadio('intub_epa','1')"><input type="radio" name="intub_epa" value="1" id="intub_epa_1"><label for="intub_epa_1">等級一 - 觀察即可，不可操作</label></div>
-            <div class="radio-item" onclick="selectRadio('intub_epa','2')"><input type="radio" name="intub_epa" value="2" id="intub_epa_2"><label for="intub_epa_2">等級二 - 直接、主動監督下執行</label></div>
-            <div class="radio-item" onclick="selectRadio('intub_epa','3')"><input type="radio" name="intub_epa" value="3" id="intub_epa_3"><label for="intub_epa_3">等級三 - 間接、反應性監督下執行</label></div>
+            <div class="radio-item" onclick="selectRadio('intub_epa','1')"><input type="radio" name="intub_epa" value="1" id="intub_epa_1"><label for="intub_epa_1">等級一 - 只能在旁邊看</label></div>
+            <div class="radio-item" onclick="selectRadio('intub_epa','2')"><input type="radio" name="intub_epa" value="2" id="intub_epa_2"><label for="intub_epa_2">等級二 - 需要直接監督才能完成</label></div>
+            <div class="radio-item" onclick="selectRadio('intub_epa','3')"><input type="radio" name="intub_epa" value="3" id="intub_epa_3"><label for="intub_epa_3">等級三 - 可以在間接監督下執行</label></div>
             <div class="radio-item" onclick="selectRadio('intub_epa','4')"><input type="radio" name="intub_epa" value="4" id="intub_epa_4"><label for="intub_epa_4">等級四 - 獨立操作執行，事後確認即可</label></div>
             <div class="radio-item" onclick="selectRadio('intub_epa','5')"><input type="radio" name="intub_epa" value="5" id="intub_epa_5"><label for="intub_epa_5">等級五 - 對資淺學員進行監督教學</label></div>
         </div>
@@ -453,8 +453,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const txt = item.querySelector('input[type="text"]');
         if (txt && cb) {
             txt.addEventListener('input', function () {
-                cb.disabled = !this.value.trim();
-                if (!this.value.trim()) cb.checked = false;
+                const hasText = !!this.value.trim();
+                cb.disabled = !hasText;
+                cb.checked = hasText;
+                const item = cb.closest('.checkbox-item');
+                if (item) item.classList.toggle('checked', hasText);
             });
         }
     });
